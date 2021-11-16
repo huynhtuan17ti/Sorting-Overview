@@ -5,10 +5,10 @@ ll selectionSortComp(int* &a, int n){
     ll cnt = 0;
     for (int i = 0; ++cnt && i < n; i++){
 		int minIndex = i;
-		for (int j = i+1; ++cnt && j < n; j++)
-			if (++cnt && a[j] < a[i]){
-				_swap(a[i], a[j]);
-			}
+		for (int j = i+1; j < n; j++)
+			if (++cnt && a[j] < a[minIndex])
+				minIndex = j;
+		_swap(a[i], a[minIndex]);
 	}
     return cnt;
 }

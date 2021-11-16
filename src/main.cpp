@@ -320,8 +320,8 @@ void experiment_option(){
 
         for(int data_idx = 0; data_idx < data_len; data_idx++){
             int n = data_size[data_idx];
-            int* a = new int[n];
-            GenerateData(a, n, gen.second);
+            int* A = new int[n];
+            GenerateData(A, n, gen.second);
 
             std:: cout << "Input size: " << n << '\n';
 
@@ -331,6 +331,9 @@ void experiment_option(){
                 std::function<void(int* &, int)> sort_func = algo.second;
                 std::function<ll(int* &, int)> sort_cmp_func = sort_algo_with_cmp[algo.first];
 
+                int* a = new int[n]; // copy A
+                for(int i = 0; i < n; i++)  a[i] = A[i];
+
                 double _time = computeTime(sort_func, a, n);
                 ll _iter = computeComparision(sort_cmp_func, a, n);
                 std:: cout << algo.first << '\t' << ": " << _time << "ms" <<  "\t | " 
@@ -338,10 +341,11 @@ void experiment_option(){
 
                 time_list[data_idx].push_back(_time);
                 comp_list[data_idx].push_back(_iter);
+                delete[] a;
             }
 
             std:: cout << "-----------------------------" << '\n';
-            delete[] a;
+            delete[] A;
         }
 
         std:: cout << "=============================" << '\n';

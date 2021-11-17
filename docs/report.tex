@@ -1,0 +1,106 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage[ruled,vlined,linesnumbered,algosection,algo2e]{algorithm2e}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{algorithm}[theorem]{Algorithm}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{graphicx}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, bottom=2.0cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\titlelabel{\thetitle.\quad}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Data Structures and Algorithms}
+\lhead{Lab 3: Sorting}
+\rfoot{Page \thepage}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+\title{
+\normalfont \LARGE
+\textsc{University of Science} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{1pt} \\[0.4cm] % Thin top horizontal rule
+\huge Sorting Algorithms - An Overview \\ % The assignment title
+\horrule{1pt} \\[0.6cm] % Thick bottom horizontal rule adjust 0.6cm suitably
+\Large Data Structures and Algorithms\\[0.5cm]  %% sub title, adjust \Large
+}
+
+\author{Huynh Minh Tuan - 20120024@student.hcmus.edu.vn}
+\date{December 2021}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    Sorting is nothing but alphabetizing, categorizing, arranging, or putting items in an ordered sequence. 
+    It is a key fundamental operation in the field of computer science. It is of extreme importance because it adds usefulness to data.
+    In this report, I have compared eleven common sorting algorithms (Selection Sort, Insertion Sort, Bubble Sort, Shaker Sort, Shell Sort, Heap
+    Sort, Merge Sort, Quick Sort, Counting Sort, Radix Sort, and Flash Sort). I have developed a program in C++, Python and experimented with several input sizes
+    10,000, 30,000, 50,000, 100,000, 300,000, and 500,000 elements. The performance and efficiency of these algorithms in terms of CPU time consumption 
+    as well as the number of comparisons that have been recorded and presented in tabular and graphical form.
+\end{abstract}
+
+\section{Introduction}
+\tab Sorting is not a leap but it has emerged in parallel with the development of the human mind.
+In computer science, alphabetizing, arranging, categorizing, or putting data items in an ordered sequence on the basis of similar properties is called sorting.
+Sorting is of key importance because it optimizes the usefulness of data.
+\newline
+\newline
+\tab We can observe plenty of sorting examples in our daily life, e.g. we can easily find required items in a shopping mall or utility store because the items are kept categorically.
+The items to be sorted may be in various forms i.e. random as a whole, already sorted, very small or extremely large in numer, sorted in reverse order etc.
+There is no algorithm that is best for sorting all types of data. 
+We must be familiar with sorting algorithms in terms of their suitability in a particular situation.
+\newline
+\newline
+\tab In this paper, I am going to compare eleven common sorting algorithms (Selection Sort, Insertion Sort, Bubble Sort, Shaker Sort, Shell Sort, Heap
+Sort, Merge Sort, Quick Sort, Counting Sort, Radix Sort, and Flash Sort) for their CPU time consumption and number of compared operations on four different data arrangements 
+(Sorted data (in ascending order), Nearly sorted data, Revherse sorted data, and Randomized data).
+
+
+\section{Algorithm presentation}
+\subsection{Selection Sort}
+
+\subsubsection*{Idea}
+\tab The Selection Sort is based on the idea of finding the minimum element in an unsorted array and then putting it in its correct position in a sorted array.
+
+\subsubsection*{Pseudo code}
+\begin{algorithm2e}
+  \KwIn{$a_1, a_2, ..., a_N$}
+  \KwOut{$a_1, a_2, ..., a_N$ (in sorted)}
+  \SetAlgoLined
+  \For{$i \gets 1$ to $N$}{
+    $minIndex \gets i$\\
+    \For{$j \gets i+1$ to N}{
+        \If{$a_{minIndex} > a_{j}$}{
+            $minIndex \gets j$
+        }
+    }
+    swap($minIndex$, $i$)
+  }
+  \caption{Selection Sort}
+\end{algorithm2e}
+
+\subsubsection*{Complexity}
+Time Complexity: $O(N^2)$ \\
+Space Complexity: $O(N)$
+
+\subsection{Insertion Sort}
+
+\subsection{Bubble Sort}
+\subsection{Shaker Sort}
+\subsection{Shell Sort}
+\subsection{Heap Sort}
+\subsection{Merge Sort}
+\subsection{Quick Sort}
+\subsection{Counting Sort}
+\subsection{Radix Sort}
+\subsection{Flash Sort}
+
+\end{document}

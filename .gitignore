@@ -1,3 +1,11 @@
 *.json
 *.pyc
 *.ipynb
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.gz
+*.zip
+*.tar
+*.sty

@@ -12,6 +12,10 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{hyperref}
+
 \titlelabel{\thetitle.\quad}
 
 \pagestyle{fancy}
@@ -68,7 +72,7 @@ Sort, Merge Sort, Quick Sort, Counting Sort, Radix Sort, and Flash Sort) for the
 \subsection{Selection Sort}
 
 \subsubsection*{Idea}
-\tab The Selection Sort is based on the idea of finding the minimum element in an unsorted array and then putting it in its correct position in a sorted array.
+The Selection Sort is based on the idea of finding the minimum element in an unsorted array and then putting it in its correct position in a sorted array.
 
 \subsubsection*{Pseudo code}
 \begin{algorithm2e}
@@ -94,7 +98,7 @@ Worst case space complexity: $O(1)$
 
 \subsection{Insertion Sort}
 \subsubsection*{Idea}
-\tab The main idea of insertion sort is that array is divided in two parts which left part is already sorted, and right part is unsorted.
+The main idea of insertion sort is that array is divided in two parts which left part is already sorted, and right part is unsorted.
 Values from the unsorted part are picked and placed at the correct position in the sorted part.
 So, at every iteration sorted part grows by one element which is called key.
 During an iteration, if compared element is greater than key then compared element has to shift to right to open a position for key.
@@ -124,7 +128,7 @@ Worst case space complexity: $O(1)$
 
 \subsection{Bubble Sort}
 \subsubsection*{Idea}
-\tab Bubble sort is based on the idea of repeatedly comparing pairs of adjacent elements and then 
+Bubble sort is based on the idea of repeatedly comparing pairs of adjacent elements and then 
 swapping their positions if they exist in the wrong order.
 
 \subsubsection*{Pseudo code}
@@ -158,7 +162,7 @@ Worst case space complexity: $O(1)$
 
 \subsection{Shaker Sort}
 \subsubsection*{Idea}
-\tab Shaker sort is a bidirectional version of bubble sort.
+Shaker sort is a bidirectional version of bubble sort.
 The Bubble sort algorithm always traverses elements from left and moves the largest 
 element to its correct position in first iteration and second largest in second iteration and so on.
 Shaker sort orders the array in both directions. Hence every iteration of the algorithm consists of two phases. 
@@ -256,7 +260,7 @@ Worst case space complexity: $O(1)$
 
 \subsection{Heap Sort}
 \subsubsection*{Idea}
-\tab Heap sort is a comparison-based sorting algorithm. 
+Heap sort is a comparison-based sorting algorithm. 
 Heap sort can be thought of as an improved selection sort: like selection sort, heap sort divides its input into a sorted and an unsorted region, and it iteratively shrinks the unsorted region by extracting the largest element from it and inserting it into the sorted region. 
 \newline
 \tab Unlike selection sort, heapsort does not waste time with a linear-time scan of the unsorted region; rather, heap sort maintains the unsorted region 
@@ -315,7 +319,7 @@ Worst case space complexity: $O(1)$
 
 \subsection{Merge Sort}
 \subsubsection*{Idea}
-\tab Merge sort is a recursive sorting algorithm based on a "divide and conquer" approach.
+Merge sort is a recursive sorting algorithm based on a "divide and conquer" approach.
 It divides the input array into two halves, calls itself for the two halves, and then merges the two sorted halves.
 
 \subsubsection*{Pseudo code}
@@ -432,7 +436,276 @@ Worst case time complexity: $O(N^2)$ \\
 Worst case space complexity: $O(1)$
 
 \subsection{Counting Sort}
+\subsubsection*{Idea}
+Counting sort is a sorting algorithm that sorts the elements of an array by counting the number of occurrences of each unique element in the array. 
+The count is stored in an auxiliary array and the sorting is done by mapping the count as an index of the auxiliary array.
+
+\subsubsection*{Pseudo code}
+\begin{algorithm2e}
+  \KwIn{$a_1, a_2, ..., a_N$}
+  \KwOut{$a_1, a_2, ..., a_N$ (in sorted)}
+  \SetAlgoLined
+  $maxVal \gets a_0$\\
+  \For{$i \gets 1$ to $N$}{
+    \If{$a_i > maxVal$}{
+      $maxVal \gets a_i$
+    }
+  }
+  $count \gets [0]*(maxVal+1)$ \tcp{initialize 0-value counting array}
+  \ForEach{$u \in a$}{
+    $count_u \gets count_u + 1$
+  }
+  \tcp{restore the elements to array}
+  $idx \gets 0$\\
+  \For{$i \gets 0$ to $maxVal$}{
+    \While{$count_i > 0$}{
+      $a_{idx} \gets i$\\
+      $idx \gets idx + 1$\\
+      $count_i \gets count_i - 1$
+    }
+  }
+  
+  \caption{Counting Sort}
+\end{algorithm2e}
+
+\subsubsection*{Complexity}
+Best case time complexity: $O(\text{MaxValue})$ \\
+Average case time complexity: $O(\text{MaxValue})$\\
+Worst case time complexity: $O(\text{MaxValue})$ \\
+Worst case space complexity: $O(\text{MaxValue})$\\
+where MaxValue is the maximum value of input array.
+
 \subsection{Radix Sort}
+\subsubsection*{Idea}
+The idea of Radix Sort is to do digit by digit sort starting from least significant digit to most significant digit. 
+Radix sort uses counting sort as a subroutine to sort.
+
+\subsubsection*{Pseudo code}
+\begin{algorithm2e}
+  \KwIn{$a_1, a_2, ..., a_N$}
+  \KwOut{$a_1, a_2, ..., a_N$ (in sorted)}
+  \SetAlgoLined
+  $maxVal \gets a_0$\\
+  \For{$i \gets 1$ to $N$}{
+    \If{$a_i > maxVal$}{
+      $maxVal \gets a_i$
+    }
+  }
+  $exp \gets 1$\\
+  \While{$\dfrac{maxVal}{exp} > 0$}{
+    $digit \gets$ array with of N elements\\
+    \For{$i \gets 1$ to $N$}{
+      \tcp{get corresponding digit}
+      $digit_i \gets \dfrac{a_i}{exp} \mod{10}$\\ 
+    }
+    \tcp{do counting sort of a[] according to the digit represented by exp}
+    CountingSort($a$, $n$, $digit$)\\
+    $exp \gets exp \cdot 10$
+  }
+  
+  \caption{Radix Sort}
+\end{algorithm2e}
+
+\subsubsection*{Complexity}
+Best case time complexity: $O(N \cdot d)$ \\
+Average case time complexity: $O(N \cdot d)$\\
+Worst case time complexity: $O(N \cdot d)$ \\
+Worst case space complexity: $O(N)$\\
+where $d$ is the maximum number of digits
+
 \subsection{Flash Sort}
+\subsubsection*{Idea}
+The main idea of Flash Sort is to assign each of the n input elements to one of m partitions, 
+efficiently rearranges the input to place the partitions in the correct order, then sorts each partition.
+\newline
+\newline
+The algorithm can be represented as four stages:
+\begin{enumerate}
+  \item The number of partitions is calculated.
+  \item Set clear boundaries in our original array for every partitions.
+  \item Rearrange the elements in the original array so that each of them was in its place, 
+  in its partition.
+  \item Do Insertion Sort for sorting locally.
+\end{enumerate}
+
+\subsubsection*{Pseudo code}
+\begin{algorithm2e}
+  \KwIn{$a_1, a_2, ..., a_N$}
+  \KwOut{$a_1, a_2, ..., a_N$ (in sorted)}
+  \SetAlgoLined
+  \tcp{stage 1}
+  \tcp{d should be in range [0.4, 0.6]}
+  $m \gets d \cdot n$\\
+
+  \tcp{stage 2}
+  $minVal \gets a_1$\\
+  $maxIndex \gets 1$\\
+  \For{$i \gets 1$ to $N$}{
+    \If{$a_i < minVal$}{
+      $minVal \gets a_i$
+    }
+    \If{$a_{maxIndex} < a_i$}{
+      $maxIndex \gets i$
+    }
+  }
+  \If{$a_{maxIndex} == minVal$}{
+    stop algorithm
+  }
+  
+  \tcp{classify elements into corresponding partition}
+  $c \gets \dfrac{m-1}{a_{maxIndex} - minVal}$\\
+  \For{$i \gets 1$ to $N$}{
+    $cls \gets c \cdot (a_i - minVal)$\\
+    $L_{cls} \gets L_{cls} + 1$ 
+  }
+  \For{$i \gets 1$ to m}{
+    $L_i \gets L_i + L_{i-1}$
+  }
+  
+  \tcp{stage 3}
+  swap($a_{maxIndex}, a_1$)
+  $nmove \gets 0$\\
+  $j \gets 0$\\
+  $k \gets m-1$\\
+  $t \gets 0$\\
+  
+  \While{$nmove < N$}{
+    \While{$j > L_k - 1$}{
+      $j \gets j + 1$\\
+      $k \gets c \cdot (a_j - minVal)$
+    }
+    $flash \gets a_j$\\
+    \If{k < 0}{
+      \textbf{break}
+    }
+    \While{$j \neq L_k$}{
+      $k \gets c \cdot (flash - minVal)$\\
+      $L_k \gets L_k - 1$\\
+      $t \gets L_k$\\
+      $hold \gets a_t$\\
+      $a_t \gets flash$\\
+      $flash \gets hold$\\
+      $nmove \gets nmove + 1$
+    }
+    \tcp{stage 4}
+    InsertionSort($a$, $n$)
+  }
+  
+  \caption{Flash Sort}
+\end{algorithm2e}
+
+\newpage
+\subsubsection*{Complexity}
+The time complexity of Flash Sort base on choosing value $m$.
+For example, if $m$ is chosen proportional to $\sqrt n$, the time complexity is $O(n^{3/2})$.
+In this paper, I chosen $0.45$ for $m$.
+\newline
+Space complexity: $O(1)$
+
+\section{Experimental results}
+All the eleven sorting algorithms were implemented in C++ programming language and tested on six input of lenght 10000,
+30000, 50000, 100000, 300000, and 500000 of four data orders (Sorted data, Nearly sorted data, Reverse sorted data and Randomized data).
+All experiments were executed on machine Operating System having Intel(R) Core(TM) i5-10210U CPU @ 1.60Ghz (8 CPUs) and installed memory (RAM) 8GB.
+The results were calculated after tabulation and their graphical represention was developed using Python programming language.
+\newline
+\begin{table}
+  \centering
+  \small
+\begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \hline
+  \multicolumn{7}{|c|}{Data Order: Sorted data} \\
+  \hline
+  \textbf{Data size} & \multicolumn{2}{|c|}{\text{10,000}} & \multicolumn{2}{|c|}{\text{30,000}} & \multicolumn{2}{|c|}{\text{50,000}}\\
+  \hline
+  \textbf{Result} & Time (ms) & Comparision & Time (ms) & Comparision & Time (ms) & Comparision \\
+  \hline
+  Selection & 134.179 & 50005001 & 1010.114 & 450015001 & 3161.295 & 1250025001 \\
+  \hline
+  Insertion & 0.055 & 19999 & 0.155 & 59999 & 0.179000 & 99999 \\
+  \hline
+  Bubble & 0.036 & 20001 & 0.075 & 60001 & 0.123 & 100001 \\
+  \hline
+  Shaker & 0.026 & 20001 & 0.073 & 60001 & 0.129 & 100001 \\
+  \hline
+  Shell & 0.558 & 240024 & 1.762000 & 780029 & 3.423000 & 1400028 \\
+  \hline
+  Heap & 2.333 & 518705 & 5.418 & 1739633 & 9.129000 & 3056481 \\
+  \hline
+  Merge & 1.694 & 406234 & 3.632 & 1332186 & 6.21 & 2320874 \\
+  \hline
+  Quick & 0.598 & 193611 & 1.327 & 627227 & 2.218 & 1084459 \\
+  \hline
+  Counting & 0.162 & 60003 & 0.369 & 180003 & 0.572 & 300003 \\
+  \hline
+  Radix & 1.489 & 170106 & 3.738 & 630132 & 7.198 & 1050132 \\
+  \hline
+  Flash & 0.597 & 103496 & 1.118 & 310496 & 2.359 & 517496 \\
+  \hline
+\end{tabular}
+\caption{Experimental results on sorted data}
+\end{table}
+
+\begin{figure}[H]
+  \includegraphics[width = 16cm]{plot/sorted_line.png}
+  \centering
+  \caption{Visualizing the algorithms' running times on sorted data}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width = 16cm]{plot/nsorted_line.png}
+  \centering
+  \caption{Visualizing the algorithms' running times on nearly sorted data}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width = 16cm]{plot/rev_line.png}
+  \centering
+  \caption{Visualizing the algorithms' running times on reverse sorted data}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width = 16cm]{plot/rand_line.png}
+  \centering
+  \caption{Visualizing the algorithms' running times on randomized data}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width = 16cm]{plot/sorted_bar.png}
+  \centering
+  \caption{Visualizing the algorithms' numbers of comparisons on sorted data}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width = 16cm]{plot/nsorted_bar.png}
+  \centering
+  \caption{Visualizing the algorithms' numbers of comparisons on nearly sorted data}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width = 16cm]{plot/rev_bar.png}
+  \centering
+  \caption{Visualizing the algorithms' numbers of comparisons on reverse sorted data}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width = 16cm]{plot/rand_bar.png}
+  \centering
+  \caption{Visualizing the algorithms' numbers of comparisons on randomized data}
+\end{figure}
+
+\section{Project organization}
+C++ programming language was used in sorting algorithms' implementation.
+Python programming language and open libraries (Pandas, Matplotlib, Seaborn) were used in processing data and graphical visualizing.
+\newline
+Source code: \url{https://github.com/huynhtuan17ti/Sorting-Overview}
+
+\section{References}
+\begin{enumerate}
+  \item \url{https://www.geeksforgeeks.org/} (For nice explanations and source code of several sorting algorithms)\\
+  \item \url{https://www.wikipedia.org/} (Scientific explanations of all sorting algorithms)\\
+  \item \url{https://www.researchgate.net/publication/315662067_Sorting_Algorithms_-_A_Comparative_Study}\\
+  \item \url{https://www.researchgate.net/publication/259911982_Review_on_Sorting_Algorithms_A_Comparative_Study}\\
+  \item Introduction to Algorithms (Third edition)\\
+\end{enumerate}
 
 \end{document}

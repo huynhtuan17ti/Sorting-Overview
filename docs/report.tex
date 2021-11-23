@@ -293,18 +293,18 @@ in a \textbf{heap data structure} to more quickly find the largest element in ea
   \SetKwProg{Fn}{Function}{:}{}
   \Fn{\FMain{$a$, $N$}}{
     \For{$i \gets N/2$ to $0$}{
-      HeapRebuild($a$, $i$, $n$)
+      \Call{HeapRebuild}{$a$, $i$, $n$}
     }
   }
 
   \SetKwFunction{FMain}{HeapSort}
   \SetKwProg{Fn}{Function}{:}{}
   \Fn{\FMain{$a$, $N$}}{
-    HeapConstruct(a, N)\\
+    \Call{HeapConstruct}{a, N}\\
     $r \gets N$\\
     \While{$r > 0$}{
       swap($a_1$, $a_N$)\\
-      HeapRebuild(a, 1, r)\\
+      \Call{HeapRebuild}{a, 1, r}\\
       $r \gets r-1$
     }
   }
@@ -364,9 +364,9 @@ It divides the input array into two halves, calls itself for the two halves, and
   \Fn{\FMain{$a$, $first$, $last$}}{
     \If{$first < last$}{
       $mid \gets first + (last - first)/2$\\
-      MergeSort($a$, $first$, $mid$)\\
-      MergeSort($a$, $mid+1$, $last$)\\
-      Merge($a$, $first$, $mid$, $last$)
+      \Call{MergeSort}{$a$, $first$, $mid$}\\
+      \Call{MergeSort}{$a$, $mid+1$, $last$}\\
+      \Call{Merge}{$a$, $first$, $mid$, $last$}
     }
   }
   \caption{Merge Sort}
@@ -421,9 +421,9 @@ In this paper, I implemented the algorithm with pivot is a median of array.
   \SetKwProg{Fn}{Function}{:}{}
   \Fn{\FMain{$a$, $l$, $r$}}{
     \If{$l < r$}{
-      $mid \gets$ Partition($a$, $l$, $r$)\\
-      QuickSort($a$, $l$, $mid-1$)\\
-      QuickSort($a$, $mid$, $r$)
+      $mid \gets$ \Call{Partition}{$a$, $l$, $r$}\\
+      \Call{QuickSort}{$a$, $l$, $mid-1$}\\
+      \Call{QuickSort}{$a$, $mid$, $r$}
     }
   }
   \caption{Quick Sort}
@@ -499,7 +499,7 @@ Radix sort uses counting sort as a subroutine to sort.
       $digit_i \gets \dfrac{a_i}{exp} \mod{10}$\\ 
     }
     \tcp{do counting sort of a[] according to the digit represented by exp}
-    CountingSort($a$, $n$, $digit$)\\
+    \Call{CountingSort}{$a$, $n$, $digit$}\\
     $exp \gets exp \cdot 10$
   }
   
@@ -598,7 +598,7 @@ The algorithm can be represented as four stages:
 \subsubsection*{Complexity}
 The time complexity of Flash Sort base on choosing value $m$.
 For example, if $m$ is chosen proportional to $\sqrt n$, the time complexity is $O(n^{3/2})$.
-In this paper, I chosen $0.45$ for $m$.
+In this paper, I chose $0.45$ for $m$.
 \newline
 Space complexity: $O(1)$
 
@@ -608,7 +608,10 @@ All the eleven sorting algorithms were implemented in C++ programming language a
 All experiments were executed on machine Operating System having Intel(R) Core(TM) i5-10210U CPU @ 1.60Ghz (8 CPUs) and installed memory (RAM) 8GB.
 The results were calculated after tabulation and their graphical represention was developed using Python programming language.
 \newline
-\begin{table}
+
+%----------------------------------- Sorted data -------------------------------%
+
+\begin{table}[H]
   \centering
   \small
 \begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
@@ -642,8 +645,112 @@ The results were calculated after tabulation and their graphical represention wa
   Flash & 0.597 & 103496 & 1.118 & 310496 & 2.359 & 517496 \\
   \hline
 \end{tabular}
+
+\begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \hline
+  \hline
+  \textbf{Data size} & \multicolumn{2}{|c|}{\text{100,000}} & \multicolumn{2}{|c|}{\text{300,000}} & \multicolumn{2}{|c|}{\text{500,000}}\\
+  \hline
+  \textbf{Result} & Time (ms) & Comparision & Time (ms) & Comparision & Time (ms) & Comparision \\
+  \hline
+  Selection & 11578.892 & 5000050001 & 101293.857 & 45000150001 & 281740.886 & 125000250001 \\
+  \hline
+  Insertion & 0.411 & 199999 & 1.044 & 599999 & 1.829 & 999999 \\
+  \hline
+  Bubble & 0.282 & 200001 & 0.765 & 600001 & 1.303 & 1000001  \\
+  \hline
+  Shaker & 0.245 & 200001 & 0.778 & 600001 & 1.272 & 1000001 \\
+  \hline
+  Shell & 7.336 & 3000029 & 25.944 & 10200035 & 41.04 & 17000033 \\
+  \hline
+  Heap & 19.542 & 6519813 & 60.3 & 21431637 & 102.634 & 37116275 \\
+  \hline
+  Merge & 1.694 & 406234 & 3.632 & 1332186 & 6.21 & 2320874 \\
+  \hline
+  Quick & 13.286 & 4891754 & 43.119 & 15848682 & 71.659 & 27234634 \\
+  \hline
+  Counting & 1.267 & 600003 & 3.35 & 1800003 & 5.708 & 3000003 \\
+  \hline
+  Radix & 13 & 2100132 & 44.787 & 7500158 & 76.2 & 12500158 \\
+  \hline
+  Flash & 4.02 & 1034996 & 11.634 & 3104996 & 19.422 & 5174996 \\
+  \hline
+\end{tabular}
+
 \caption{Experimental results on sorted data}
 \end{table}
+
+%---------------- Nearly sorted data --------------------%
+
+\begin{table}[H]
+  \centering
+  \small
+\begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \hline
+  \multicolumn{7}{|c|}{Data Order: Nearly Sorted data} \\
+  \hline
+  \textbf{Data size} & \multicolumn{2}{|c|}{\text{10,000}} & \multicolumn{2}{|c|}{\text{30,000}} & \multicolumn{2}{|c|}{\text{50,000}}\\
+  \hline
+  \textbf{Result} & Time (ms) & Comparision & Time (ms) & Comparision & Time (ms) & Comparision \\
+  \hline
+  Selection & 110.647 & 50005001 & 948.147 & 450015001 & 2468.645 & 1250025001 \\
+  \hline
+  Insertion & 0.214 & 19999 & 0.598 & 59999 & 0.973 & 99999 \\
+  \hline
+  Bubble & 0.036 & 20001 & 0.075 & 60001 & 0.123 & 100001 \\
+  \hline
+  Shaker & 0.026 & 20001 & 0.073 & 60001 & 0.129 & 100001 \\
+  \hline
+  Shell & 0.558 & 240024 & 1.762000 & 780029 & 3.423000 & 1400028 \\
+  \hline
+  Heap & 2.333 & 518705 & 5.418 & 1739633 & 9.129000 & 3056481 \\
+  \hline
+  Merge & 1.694 & 406234 & 3.632 & 1332186 & 6.21 & 2320874 \\
+  \hline
+  Quick & 0.598 & 193611 & 1.327 & 627227 & 2.218 & 1084459 \\
+  \hline
+  Counting & 0.162 & 60003 & 0.369 & 180003 & 0.572 & 300003 \\
+  \hline
+  Radix & 1.489 & 170106 & 3.738 & 630132 & 7.198 & 1050132 \\
+  \hline
+  Flash & 0.597 & 103496 & 1.118 & 310496 & 2.359 & 517496 \\
+  \hline
+\end{tabular}
+
+\begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \hline
+  \hline
+  \textbf{Data size} & \multicolumn{2}{|c|}{\text{100,000}} & \multicolumn{2}{|c|}{\text{300,000}} & \multicolumn{2}{|c|}{\text{500,000}}\\
+  \hline
+  \textbf{Result} & Time (ms) & Comparision & Time (ms) & Comparision & Time (ms) & Comparision \\
+  \hline
+  Selection & 11578.892 & 5000050001 & 101293.857 & 45000150001 & 281740.886 & 125000250001 \\
+  \hline
+  Insertion & 0.411 & 199999 & 1.044 & 599999 & 1.829 & 999999 \\
+  \hline
+  Bubble & 0.282 & 200001 & 0.765 & 600001 & 1.303 & 1000001  \\
+  \hline
+  Shaker & 0.245 & 200001 & 0.778 & 600001 & 1.272 & 1000001 \\
+  \hline
+  Shell & 7.336 & 3000029 & 25.944 & 10200035 & 41.04 & 17000033 \\
+  \hline
+  Heap & 19.542 & 6519813 & 60.3 & 21431637 & 102.634 & 37116275 \\
+  \hline
+  Merge & 1.694 & 406234 & 3.632 & 1332186 & 6.21 & 2320874 \\
+  \hline
+  Quick & 13.286 & 4891754 & 43.119 & 15848682 & 71.659 & 27234634 \\
+  \hline
+  Counting & 1.267 & 600003 & 3.35 & 1800003 & 5.708 & 3000003 \\
+  \hline
+  Radix & 13 & 2100132 & 44.787 & 7500158 & 76.2 & 12500158 \\
+  \hline
+  Flash & 4.02 & 1034996 & 11.634 & 3104996 & 19.422 & 5174996 \\
+  \hline
+\end{tabular}
+
+\caption{Experimental results on nearly sorted data}
+\end{table}
+
 
 \begin{figure}[H]
   \includegraphics[width = 16cm]{plot/sorted_line.png}
@@ -701,7 +808,7 @@ Source code: \url{https://github.com/huynhtuan17ti/Sorting-Overview}
 
 \section{References}
 \begin{enumerate}
-  \item \url{https://www.geeksforgeeks.org/} (For nice explanations and source code of several sorting algorithms)\\
+  \item \url{https://www.geeksforgeeks.org/} (Explanations and source code of several sorting algorithms)\\
   \item \url{https://www.wikipedia.org/} (Scientific explanations of all sorting algorithms)\\
   \item \url{https://www.researchgate.net/publication/315662067_Sorting_Algorithms_-_A_Comparative_Study}\\
   \item \url{https://www.researchgate.net/publication/259911982_Review_on_Sorting_Algorithms_A_Comparative_Study}\\

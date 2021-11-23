@@ -120,14 +120,23 @@ void readFile(int* &a, int &n){
 
 double computeTime(std::function<void(int* &, int)> func, int *a, int n){
     double begin, timeUsed;
+    int* tmp_a = new int[n];
+    for(int i = 0; i < n; i++)
+        tmp_a[i] = a[i];
     begin = (double)clock();
-    func(a, n);
+    func(tmp_a, n);
     timeUsed = ((double)clock() - begin)/CLOCKS_PER_SEC * 1000;
+    delete[] tmp_a;
     return timeUsed;
 }
 
 ll computeComparision(std::function<ll(int* &, int)> func, int *a, int n){
-    return func(a, n);
+    int* tmp_a = new int[n];
+    for(int i = 0; i < n; i++)
+        tmp_a[i] = a[i];
+    ll cnt =  func(tmp_a, n);
+    delete[] tmp_a;
+    return cnt;
 }
 
 void option1(){

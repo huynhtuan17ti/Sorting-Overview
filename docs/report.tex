@@ -16,6 +16,7 @@
 \usepackage{float}
 \usepackage{hyperref}
 
+\newenvironment{fignote}{\begin{quote}\footnotesize}{\end{quote}}
 \titlelabel{\thetitle.\quad}
 
 \pagestyle{fancy}
@@ -752,53 +753,237 @@ The results were calculated after tabulation and their graphical represention wa
 \end{table}
 
 
+%---------------- Reverse sorted data --------------------%
+
+\begin{table}[H]
+  \centering
+  \small
+\begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \hline
+  \multicolumn{7}{|c|}{Data Order: Nearly Sorted data} \\
+  \hline
+  \textbf{Data size} & \multicolumn{2}{|c|}{\text{10,000}} & \multicolumn{2}{|c|}{\text{30,000}} & \multicolumn{2}{|c|}{\text{50,000}}\\
+  \hline
+  \textbf{Result} & Time (ms) & Comparision & Time (ms) & Comparision & Time (ms) & Comparision \\
+  \hline
+  Selection & 114.984 & 50005001 & 1031.539 & 450015001 & 2892.041 & 1250025001 \\
+  \hline
+  Insertion & 130.475 & 100009999 & 1284.959 & 900029999 & 3295.286 & 2500049999 \\
+  \hline
+  Bubble & 313.577 & 100020000 & 2865.468 & 900060000 & 7252.795 & 2500100000 \\
+  \hline
+  Shaker & 315.843 & 100015000 & 3064.203 & 900045000 & 8452.464 & 2500075000 \\
+  \hline
+  Shell & 0.796 & 355157 & 2.491 & 1164030 & 6.851 & 2144607 \\
+  \hline
+  Heap & 1.503 & 476739 & 5.202 & 1622791 & 10.956 & 2848016 \\
+  \hline
+  Merge & 1.118 & 411833 & 3.672 & 1353961 & 6.06 & 2351433 \\
+  \hline
+  Quick & 0.586 & 203608 & 1.744 & 657224 & 2.843 & 1134456 \\
+  \hline
+  Counting & 0.098 & 60003 & 0.307 & 180003 & 0.602 & 300003 \\
+  \hline
+  Radix & 1.44 & 170106 & 5.409 & 630132 & 7.315 & 1050132 \\
+  \hline
+  Flash & 0.384 & 86006 & 1.197 & 258006 & 1.951 & 430006 \\
+  \hline
+\end{tabular}
+
+\begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \hline
+  \hline
+  \textbf{Data size} & \multicolumn{2}{|c|}{\text{100,000}} & \multicolumn{2}{|c|}{\text{300,000}} & \multicolumn{2}{|c|}{\text{500,000}}\\
+  \hline
+  \textbf{Result} & Time (ms) & Comparision & Time (ms) & Comparision & Time (ms) & Comparision \\
+  \hline
+  Selection & 10639.041 & 5000050001 & 94140.473 & 45000150001 & 254863.245 & 125000250001 \\
+  \hline
+  Insertion & 12228.275 & 10000099999 & 104455.571 & 90000299999 & 288450.598 & 250000499999 \\
+  \hline
+  Bubble & 29184.735 & 10000200000 & 245922.443 & 90000600000 & 678899.144 & 250001000000 \\
+  \hline
+  Shaker & 30121.16 & 10000150000 & 261173.905 & 90000450000 & 745604.906 & 250000750000 \\
+  \hline
+  Shell & 9.091 & 4589168 & 31.2 & 14901826 & 49.912 & 25357556 \\
+  \hline
+  Heap & 18.817 & 6087452 & 58.036 & 20187386 & 95.207 & 35135730 \\
+  \hline
+  Merge & 13.076 & 4952873 & 40.821 & 16029865 & 71.813 & 27643913 \\
+  \hline
+  Quick & 4.969 & 2368920 & 15.282 & 7575704 & 27.513 & 12975704 \\
+  \hline
+  Counting & 0.984 & 600003 & 3.02 & 1800003 & 5.921 & 3000003 \\
+  \hline
+  Radix & 12.885 & 2100132 & 40.176 & 7500158 & 70.372 & 12500158 \\
+  \hline
+  Flash & 3.859 & 860006 & 11.693 & 2580006 & 19.106 & 4300006 \\
+  \hline
+\end{tabular}
+
+\caption{Experimental results on reverse sorted data}
+\end{table}
+
+%---------------- Randomized sorted data --------------------%
+
+\begin{table}[H]
+  \centering
+  \small
+\begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \hline
+  \multicolumn{7}{|c|}{Data Order: Nearly Sorted data} \\
+  \hline
+  \textbf{Data size} & \multicolumn{2}{|c|}{\text{10,000}} & \multicolumn{2}{|c|}{\text{30,000}} & \multicolumn{2}{|c|}{\text{50,000}}\\
+  \hline
+  \textbf{Result} & Time (ms) & Comparision & Time (ms) & Comparision & Time (ms) & Comparision \\
+  \hline
+  Selection & 105.579 & 50005001 & 939.037 & 450015001 & 2628.237 & 1250025001 \\
+  \hline
+  Insertion & 58.019 & 50154899 & 527.028 & 450626857 & 1472.483 & 1252137825 \\
+  \hline
+  Bubble & 313.057 & 100014960 & 2911.841 & 900031101 & 8322.806 & 2499993072 \\
+  \hline
+  Shaker & 228.12 & 66809284 & 2131.684 & 600367899 & 6039.776 & 1666554000 \\
+  \hline
+  Shell & 1.773 & 509398 & 6.287 & 1854582 & 11.558 & 3789217 \\
+  \hline
+  Heap & 1.746 & 497238 & 5.839 & 1681366 & 13.595 & 2951638 \\
+  \hline
+  Merge & 1.593 & 463289 & 5.421 & 1528817 & 9.442 & 2664667 \\
+  \hline
+  Quick & 1.345 & 286986 & 4.395 & 933275 & 8.178 & 1611537 \\
+  \hline
+  Counting & 0.172 & 60001 & 0.549 & 180003 & 0.895 & 300001 \\
+  \hline
+  Radix & 0.919 & 170106 & 3.41 & 630132 & 6.978 & 1050132 \\
+  \hline
+  Flash & 1.746 & 497238 & 5.839 & 1681366 & 13.595 & 2951638 \\
+  \hline
+\end{tabular}
+
+\begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \hline
+  \hline
+  \textbf{Data size} & \multicolumn{2}{|c|}{\text{100,000}} & \multicolumn{2}{|c|}{\text{300,000}} & \multicolumn{2}{|c|}{\text{500,000}}\\
+  \hline
+  \textbf{Result} & Time (ms) & Comparision & Time (ms) & Comparision & Time (ms) & Comparision \\
+  \hline
+  Selection & 10471.188 & 5000050001 & 96069.631 & 45000150001 & 263963.237 & 125000250001 \\
+  \hline
+  Insertion & 5785.636 & 4977810633 & 53194.09 & 44944423565 & 147202.734 & 125106226143 \\
+  \hline
+  Bubble & 33661.256 & 9999933745 & 308169.164 & 89998878657 & 846705.019 & 250000620545 \\
+  \hline
+  Shaker & 24580.249 & 6650493563 & 228078.787 & 59935751830 & 620102.489 & 166715416590 \\
+  \hline
+  Shell & 27.963 & 8398740 & 86.959 & 29933626 & 172.871 & 58608607 \\
+  \hline
+  Heap & 22.234 & 6305394 & 77.598 & 20798645 & 149.053 & 36121064 \\
+  \hline
+  Merge & 18.848 & 5629341 & 61.769 & 18297818 & 106.604 & 31545308 \\
+  \hline
+  Quick & 16.023 & 3507410 & 50.365 & 11317513 & 87.032 & 19597319 \\
+  \hline
+  Counting & 1.88 & 600003 & 5.649 & 1800001 & 18.419 & 3000003 \\
+  \hline
+  Radix & 10.899 & 2100132 & 42.148 & 7500158 & 65.644 & 12500158 \\
+  \hline
+  Flash & 4.737 & 726414 & 16.351 & 2174658 & 57.569 & 3681221 \\
+  \hline
+\end{tabular}
+
+\caption{Experimental results on randomized data}
+\end{table}
+
 \begin{figure}[H]
   \includegraphics[width = 16cm]{plot/sorted_line.png}
   \centering
+  \begin{fignote} 
+    Note: Running sorting algorithms on sorted input data, almost all algorithms recognized that 
+    the data had been sorted except Selection Sort. So in the figure, the line of Selection Sort is significantly higher than the others.
+  \end{fignote}
   \caption{Visualizing the algorithms' running times on sorted data}
 \end{figure}
 
 \begin{figure}[H]
   \includegraphics[width = 16cm]{plot/nsorted_line.png}
   \centering
+  \begin{fignote} 
+    Note: In the figure, the lines of Selection Sort and Bubble Sort are higher than the others.
+    With this data, Selection Sort worked better than Bubble Sort.
+  \end{fignote}
   \caption{Visualizing the algorithms' running times on nearly sorted data}
 \end{figure}
 
 \begin{figure}[H]
   \includegraphics[width = 16cm]{plot/rev_line.png}
   \centering
+  \begin{fignote} 
+    Note: Shaker and Bubble Sort have the line quite higher when Insertion Sort and Selection Sort are lower. 
+    Those show that Insertion and Selection Sort worked better than Shaker and Bubble Sort on reverse sorted data but not good enough 
+    when comparing with other algorithms.
+  \end{fignote}
   \caption{Visualizing the algorithms' running times on reverse sorted data}
 \end{figure}
 
 \begin{figure}[H]
   \includegraphics[width = 16cm]{plot/rand_line.png}
   \centering
+  \begin{fignote} 
+    Note: Bubble and Shaker Sort have the worst running time on randomized data.
+    Selection Sort is a little higher than Insertion Sort. 
+    Insertion Sort had proofed that it is the most stable algorithm of all simple sorting algorithm. 
+    In other that, those advanced sorting algorithms always work well.
+  \end{fignote}
   \caption{Visualizing the algorithms' running times on randomized data}
 \end{figure}
 
 \begin{figure}[H]
   \includegraphics[width = 16cm]{plot/sorted_bar.png}
   \centering
+  \begin{fignote} 
+    Note: Selection Sort has the most number of comparisons. Bubble, Shaker and Insertion Sort have the smallest comparisions
+    since those algorithms can recognize the input data is sorted or not.
+  \end{fignote}
   \caption{Visualizing the algorithms' numbers of comparisons on sorted data}
 \end{figure}
 
 \begin{figure}[H]
   \includegraphics[width = 16cm]{plot/nsorted_bar.png}
   \centering
+  \begin{fignote} 
+    Note: Counting Sort has the least and Bubble Sort has the most number of comparisons.
+    Counting Sort sorts elements by counting the number of occurrences of each unique element in the array, so the 
+    number of comparisons is not affected if the order of data changed.
+    Opposite that, Selection, Bubble, Insertion Sort ... do have affected if the order changed, 
+    easy to recognize if comparing this figure to the above one.
+  \end{fignote}
   \caption{Visualizing the algorithms' numbers of comparisons on nearly sorted data}
 \end{figure}
 
 \begin{figure}[H]
   \includegraphics[width = 16cm]{plot/rev_bar.png}
   \centering
+  \begin{fignote} 
+    Note: In reverse sorted data, Counting Sort still kept it as the least number of comparisions.
+    When Bubble, Selection, Shaker and Insertion Sort have the most number of comparisions.
+    This behavior can be explained that those above algorithms are simple, those are not implemented to be able to recognize if the data is reverse sorted or not.
+  \end{fignote}
   \caption{Visualizing the algorithms' numbers of comparisons on reverse sorted data}
 \end{figure}
 
 \begin{figure}[H]
   \includegraphics[width = 16cm]{plot/rand_bar.png}
   \centering
+  \begin{fignote} 
+    Note: The behavior of algorithms is the same as reverse sorted data.
+  \end{fignote}
   \caption{Visualizing the algorithms' numbers of comparisons on randomized data}
 \end{figure}
+
+
+Overall, the fastest algorithm is Counting Sort, the slowest is Bubble Sort and Selection Sort (Bubble Sort can recognize sorted data but the 
+overall Selection Sort has the average time complexity better than Bubble Sort).
 
 \section{Project organization}
 C++ programming language was used in sorting algorithms' implementation.

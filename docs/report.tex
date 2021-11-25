@@ -15,6 +15,8 @@
 \usepackage{multirow}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{authblk}
+\usepackage{blindtext}
 
 \newenvironment{fignote}{\begin{quote}\footnotesize}{\end{quote}}
 \titlelabel{\thetitle.\quad}
@@ -29,14 +31,15 @@
 \newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
 \title{
 \normalfont \LARGE
-\textsc{University of Science} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{1pt} \\[0.4cm] % Thin top horizontal rule
 \huge Sorting Algorithms - An Overview \\ % The assignment title
 \horrule{1pt} \\[0.6cm] % Thick bottom horizontal rule adjust 0.6cm suitably
-\Large Data Structures and Algorithms\\[0.5cm]  %% sub title, adjust \Large
 }
 
-\author{Huynh Minh Tuan - 20120024@student.hcmus.edu.vn}
+\author[1]{Huynh Minh Tuan}
+\author[2]{Bui Huy Thong}
+\affil[1,2]{Ho Chi Minh University of Science}
+
 \date{November 2021}
 
 \begin{document}
@@ -434,7 +437,7 @@ In this paper, I implemented the algorithm with pivot is a median of array.
 Best case time complexity: $O(N)$ \\
 Average case time complexity: $O(N \log N)$\\
 Worst case time complexity: $O(N^2)$ \\
-Worst case space complexity: $O(1)$
+Worst case space complexity: $O(\log N)$
 
 \subsection{Counting Sort}
 \subsubsection*{Idea}
@@ -470,9 +473,9 @@ The count is stored in an auxiliary array and the sorting is done by mapping the
 \end{algorithm2e}
 
 \subsubsection*{Complexity}
-Best case time complexity: $O(\text{MaxValue})$ \\
-Average case time complexity: $O(\text{MaxValue})$\\
-Worst case time complexity: $O(\text{MaxValue})$ \\
+Best case time complexity: $O(N + \text{MaxValue})$ \\
+Average case time complexity: $O(N + \text{MaxValue})$\\
+Worst case time complexity: $O(N + \text{MaxValue})$ \\
 Worst case space complexity: $O(\text{MaxValue})$\\
 where MaxValue is the maximum value of input array.
 
@@ -981,9 +984,18 @@ The results were calculated after tabulation and their graphical represention wa
   \caption{Visualizing the algorithms' numbers of comparisons on randomized data}
 \end{figure}
 
-
-Overall, the fastest algorithm is Counting Sort, the slowest is Bubble Sort and Selection Sort (Bubble Sort can recognize sorted data but the 
+\section{Conclusion}
+\begin{itemize}
+\item Overall, the fastest algorithm is Counting Sort, the slowest is Bubble Sort and Selection Sort (Bubble Sort can recognize sorted data but the 
 overall Selection Sort has the average time complexity better than Bubble Sort).
+\item For sorted data, Bubble Sort and Shaker Sort have fastest running time because the time complexity to know this is a sorted data of the two algorithms above is $O(N)$.
+\item For nearly sorted data, not consider Counting Sort, Insertion Sort is the best choice due to the small number of comparisions to be performed.
+\item Selection Sort always gives bad performance (slow running time), so this algorithm should ony be used for cases where the number of elements to 
+be ordered is small.
+\item Shell Sort, Heap Sort, Merge Sort and Quick Sort have stable performances on all of data types.
+\item Counting Sort is the fastest, however there is a trade-off by using more memory.
+\item Flash Sort is not better than Counting Sort, but it is a fast algorithm and consumes very little memory.
+\end{itemize}
 
 \section{Project organization}
 C++ programming language was used in sorting algorithms' implementation.

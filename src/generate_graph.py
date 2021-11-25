@@ -1,3 +1,4 @@
+# generate line and bar plot from csv
 from graph import plot
 
 inputOrders = ['nsorted', 'rand', 'rev', 'sorted']

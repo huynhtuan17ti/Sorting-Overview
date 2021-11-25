@@ -1,4 +1,4 @@
-# convert information of csv to latex tablular format
+# convert information in csv to latex tablular format
 import pandas as pd
 import os
 

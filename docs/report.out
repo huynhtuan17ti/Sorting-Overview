@@ -12,6 +12,8 @@
 \BOOKMARK [2][-]{subsection.2.10}{Radix Sort}{section.2}% 12
 \BOOKMARK [2][-]{subsection.2.11}{Flash Sort}{section.2}% 13
 \BOOKMARK [1][-]{section.3}{Experimental results}{}% 14
-\BOOKMARK [1][-]{section.4}{Conclusion}{}% 15
-\BOOKMARK [1][-]{section.5}{Project organization}{}% 16
-\BOOKMARK [1][-]{section.6}{References}{}% 17
+\BOOKMARK [1][-]{section.4}{Conclusions}{}% 15
+\BOOKMARK [2][-]{subsection.4.1}{Stable algorithms}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.2}{Unstable Algorithms}{section.4}% 17
+\BOOKMARK [1][-]{section.5}{Project organization}{}% 18
+\BOOKMARK [1][-]{section.6}{References}{}% 19

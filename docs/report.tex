@@ -96,7 +96,15 @@ The Selection Sort is based on the idea of finding the minimum element in an uns
 \end{algorithm2e}
 
 \subsubsection*{Complexity}
+In each stage, the algorithm takes the smallest unsorted element. In initial stage, the data has $N$ elements, so the algorithm needs $n-1$ steps and 
+moves the current smallest number to the top of the data. After this stage, number of unsorted elements remains to $n-1$, and this number will be reduced until it equal to one.
+Conclusion, the number of comparisions:
+\newline
+$$(n-1) + (n-2) + ... + 2 + 1 = \dfrac{n(n-1)}{2}$$
+\newline
+So the complexity of this algorithm is $O(N^2)$.\\
 Best case time complexity: $O(N^2)$ \\
+Average case time complexity: $O(N^2)$\\
 Worst case time complexity: $O(N^2)$ \\
 Worst case space complexity: $O(1)$
 
@@ -125,6 +133,10 @@ During an iteration, if compared element is greater than key then compared eleme
 \end{algorithm2e}
 \newpage
 \subsubsection*{Complexity}
+To evaluate the complexity of Insertion Sort, the number of comparisions and assignments need to be calculated.
+At each stage, the algorithm find a suitable position for an unsorted element.
+The finding part requires at most $O(N)$ comparisons and assignments, and the best case is $O(1)$ if 
+the unsorted element is at the end of sorted section.\\
 Best case time complexity: $O(N)$ \\
 Average case time complexity: $O(N^2)$\\
 Worst case time complexity: $O(N^2)$ \\
@@ -159,7 +171,11 @@ In this paper, I implemented bubble sort with a flag $isSwap$ to stop the algori
 when the array is sorted.
 
 \subsubsection*{Complexity}
-Best case time complexity: $O(N)$ \\
+The number of comparisons is $n-1$ is first stage, and so on $n-2$, $n-1$, $...$, $1$.
+The number of swaps in the worst case is same as the number of comparisions and best case is $0$ (sorted data).
+So on all best case and worst case the complexity of this algorithm is $O(N^2)$.
+But in reality, the algorithm runs faster in sorted array than in other data.\\
+Best case time complexity: $O(N^2)$ \\
 Average case time complexity: $O(N^2)$\\
 Worst case time complexity: $O(N^2)$ \\
 Worst case space complexity: $O(1)$
@@ -213,7 +229,9 @@ In the first one, the lightest bubble ascends to the end of the array, in the se
 \end{algorithm2e}
 
 \subsubsection*{Complexity}
-Best case time complexity: $O(N)$ \\
+The complexity of the Shaker sort algorithm is exactly the same as that of Bubble sort, the only difference is that the running time is faster 
+because the number of steps is less. In general, when talking about the complexity, it's still $O(N^2)$ in any case.\\
+Best case time complexity: $O(N^2)$ \\
 Average case time complexity: $O(N^2)$\\
 Worst case time complexity: $O(N^2)$ \\
 Worst case space complexity: $O(1)$
@@ -257,10 +275,9 @@ In this paper, I only implemented the algorithm with optimal sequence based on S
 \end{algorithm2e}
 
 \subsubsection*{Complexity}
-Best case time complexity: $O(N)$ \\
-Average case time complexity: $O(N\log N)$\\
-Worst case time complexity: $O(N^2)$ \\
-Worst case space complexity: $O(1)$
+The complexity of this algorithm bases on $M$, which is length of the interval between the elements.
+The evaluation of the complexity of Shell Sort is still an open problem, with no solution.\\
+Worst case space complexity: $O(M)$
 
 \subsection{Heap Sort}
 \subsubsection*{Idea}
@@ -316,7 +333,9 @@ in a \textbf{heap data structure} to more quickly find the largest element in ea
 \end{algorithm2e}
 
 \subsubsection*{Complexity}
-Best case time complexity: $O(N \log N)$ \\
+In first stage, the complexity of the max-heap construction is $O(N)$.
+In second stage, the complexity is $O(N\log N)$ because the algorithm needs to take $N$ heap adjustment, each adjustment takes at most $O(\log N)$.\\ 
+Best case time complexity: $O(N)$ \\
 Average case time complexity: $O(N\log N)$\\
 Worst case time complexity: $O(N \log N)$ \\
 Worst case space complexity: $O(1)$
@@ -473,11 +492,12 @@ The count is stored in an auxiliary array and the sorting is done by mapping the
 \end{algorithm2e}
 
 \subsubsection*{Complexity}
-Best case time complexity: $O(N + \text{MaxValue})$ \\
-Average case time complexity: $O(N + \text{MaxValue})$\\
-Worst case time complexity: $O(N + \text{MaxValue})$ \\
-Worst case space complexity: $O(\text{MaxValue})$\\
-where MaxValue is the maximum value of input array.
+The complexity of Counting Sort depends on the difference of the largest and smallest element of the input array.\\
+Best case time complexity: $O(N + \text{K})$ \\
+Average case time complexity: $O(N + \text{K})$\\
+Worst case time complexity: $O(N + \text{K})$ \\
+Worst case space complexity: $O(\text{K})$\\
+where K is the difference of the largest and smallest element of the input array.
 
 \subsection{Radix Sort}
 \subsubsection*{Idea}
@@ -511,11 +531,12 @@ Radix sort uses counting sort as a subroutine to sort.
 \end{algorithm2e}
 
 \subsubsection*{Complexity}
+In this paper, the algorithm is implemented in base $10$. So the complexity is $O (N\log_{10} M)$, where $Max$ is maximum value of input array.\\
 Best case time complexity: $O(N \cdot d)$ \\
 Average case time complexity: $O(N \cdot d)$\\
 Worst case time complexity: $O(N \cdot d)$ \\
 Worst case space complexity: $O(N)$\\
-where $d$ is the maximum number of digits
+where $d$ is the maximum number of digits, equal to $(\log_{10} M)$.
 
 \subsection{Flash Sort}
 \subsubsection*{Idea}
@@ -601,8 +622,11 @@ The algorithm can be represented as four stages:
 \newpage
 \subsubsection*{Complexity}
 The time complexity of Flash Sort base on choosing value $m$.
-For example, if $m$ is chosen proportional to $\sqrt n$, the time complexity is $O(n^{3/2})$.
-In this paper, I chose $0.45$ for $m$.
+On average, there are $\dfrac{N}{m}$ elements in each partition, so the complexity for sorting each partition is $O(\dfrac{N^2}{m^2})$.
+The total time complexity is $O(\dfrac{N^2}{m^2}\cdot m)$ for $m$ partitions.
+For example, if $m$ is chosen proportional to $\sqrt N$, the time complexity is $O(N^{3/2})$.
+In this paper, I chose $0.43$ for $m$, the average complexity will be approximately $O(N)$.
+\newline
 \newline
 Space complexity: $O(m)$
 
@@ -763,7 +787,7 @@ The results were calculated after tabulation and their graphical represention wa
   \small
 \begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
   \hline
-  \multicolumn{7}{|c|}{Data Order: Nearly Sorted data} \\
+  \multicolumn{7}{|c|}{Data Order: Reverse Sorted data} \\
   \hline
   \textbf{Data size} & \multicolumn{2}{|c|}{\text{10,000}} & \multicolumn{2}{|c|}{\text{30,000}} & \multicolumn{2}{|c|}{\text{50,000}}\\
   \hline
@@ -827,14 +851,14 @@ The results were calculated after tabulation and their graphical represention wa
 \caption{Experimental results on reverse sorted data}
 \end{table}
 
-%---------------- Randomized sorted data --------------------%
+%---------------- Randomized data --------------------%
 
 \begin{table}[H]
   \centering
   \small
 \begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
   \hline
-  \multicolumn{7}{|c|}{Data Order: Nearly Sorted data} \\
+  \multicolumn{7}{|c|}{Data Order: Randomized data} \\
   \hline
   \textbf{Data size} & \multicolumn{2}{|c|}{\text{10,000}} & \multicolumn{2}{|c|}{\text{30,000}} & \multicolumn{2}{|c|}{\text{50,000}}\\
   \hline
@@ -984,7 +1008,7 @@ The results were calculated after tabulation and their graphical represention wa
   \caption{Visualizing the algorithms' numbers of comparisons on randomized data}
 \end{figure}
 
-\section{Conclusion}
+\section{Conclusions}
 \begin{itemize}
 \item Overall, the fastest algorithm is Counting Sort, the slowest is Bubble Sort and Selection Sort (Bubble Sort can recognize sorted data but the 
 overall Selection Sort has the average time complexity better than Bubble Sort).
@@ -996,6 +1020,14 @@ be ordered is small.
 \item Counting Sort is the fastest, however there is a trade-off by using more memory.
 \item Flash Sort is not better than Counting Sort, but it is a fast algorithm and consumes very little memory.
 \end{itemize}
+
+\subsection{Stable algorithms}
+In my implementation, the stable algorithms include: Insertion Sort, Bubble Sort, Shaker Sort, Merge Sort, Counting Sort.
+In these algorithms, Counting Sort has the lowest running time as well as complexity.
+
+\subsection{{Unstable Algorithms}}
+In my implementation, the unstable algorithms include: Selection Sort, Shell Sort, Heap Sort, 
+Quick Sort, Radix Sort, Flash Sort. Of these algorithms, the fastest running algorithm is still Flash Sort.
 
 \section{Project organization}
 C++ programming language was used in sorting algorithms' implementation.
